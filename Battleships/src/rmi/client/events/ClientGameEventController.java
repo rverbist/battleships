@@ -8,6 +8,10 @@ import domain.Location;
 import domain.MapSlot;
 import domain.Player;
 
+/**
+ * an observable controller that exposes all events fired by server
+ * @author rverbist
+ */
 public final class ClientGameEventController implements IClientGameEventListener
 {
     private final Set<IClientGameEventListener> _listeners;
@@ -17,6 +21,10 @@ public final class ClientGameEventController implements IClientGameEventListener
         _listeners = new LinkedHashSet<IClientGameEventListener>();
     }
 
+    /**
+     * adds a listener
+     * @param listener the listener to add
+     */
     public void addListener(final IClientGameEventListener listener)
     {
         if (listener == this)
@@ -26,16 +34,26 @@ public final class ClientGameEventController implements IClientGameEventListener
         _listeners.add(listener);
     }
 
+    /**
+     * removes a listener
+     * @param listener the listener to remove
+     */
     public void removeListener(final IClientGameEventListener listener)
     {
         _listeners.remove(listener);
     }
 
+    /**
+     * clears the listeners associated with this controller
+     */
     public void clearListeners()
     {
         _listeners.clear();
     }
 
+    /* (non-Javadoc)
+     * @see rmi.client.events.IClientGameEventListener#onConnected(domain.Player)
+     */
     @Override
     public void onConnected(final Player player)
     {
@@ -45,6 +63,9 @@ public final class ClientGameEventController implements IClientGameEventListener
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.client.events.IClientGameEventListener#onDisconnected(domain.Player)
+     */
     @Override
     public void onDisconnected(final Player player)
     {
@@ -54,6 +75,9 @@ public final class ClientGameEventController implements IClientGameEventListener
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.client.events.IClientGameEventListener#onGlobalChatMessage(java.lang.String)
+     */
     @Override
     public void onGlobalChatMessage(final String message)
     {
@@ -63,6 +87,9 @@ public final class ClientGameEventController implements IClientGameEventListener
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.client.events.IClientGameEventListener#onPlayerJoinedTeam(domain.Player, int)
+     */
     @Override
     public void onPlayerJoinedTeam(final Player player, final int team)
     {
@@ -72,6 +99,9 @@ public final class ClientGameEventController implements IClientGameEventListener
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.client.events.IClientGameEventListener#onPlayerLeftTeam(domain.Player)
+     */
     @Override
     public void onPlayerLeftTeam(final Player player)
     {
@@ -81,6 +111,9 @@ public final class ClientGameEventController implements IClientGameEventListener
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.client.events.IClientGameEventListener#onPlayerAssigned(domain.Player)
+     */
     @Override
     public void onPlayerAssigned(final Player player)
     {
@@ -90,6 +123,9 @@ public final class ClientGameEventController implements IClientGameEventListener
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.client.events.IClientGameEventListener#onPlayerUnassigned(domain.Player)
+     */
     @Override
     public void onPlayerUnassigned(final Player player)
     {
@@ -99,6 +135,9 @@ public final class ClientGameEventController implements IClientGameEventListener
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.client.events.IClientGameEventListener#onTeamChatMessage(java.lang.String)
+     */
     @Override
     public void onTeamChatMessage(final String message)
     {
@@ -108,6 +147,9 @@ public final class ClientGameEventController implements IClientGameEventListener
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.client.events.IClientGameEventListener#onPlayerIsReadyChanged(domain.Player)
+     */
     @Override
     public void onPlayerIsReadyChanged(final Player player)
     {
@@ -117,6 +159,9 @@ public final class ClientGameEventController implements IClientGameEventListener
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.client.events.IClientGameEventListener#onGameStart(int, domain.Board)
+     */
     @Override
     public void onGameStart(final int team, final Board board)
     {
@@ -126,6 +171,9 @@ public final class ClientGameEventController implements IClientGameEventListener
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.client.events.IClientGameEventListener#onGameTurnStart(int)
+     */
     @Override
     public void onGameTurnStart(final int turn)
     {
@@ -135,6 +183,9 @@ public final class ClientGameEventController implements IClientGameEventListener
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.client.events.IClientGameEventListener#onPlayerAddSuggestion(domain.Player, domain.Location)
+     */
     @Override
     public void onPlayerAddSuggestion(final Player player, final Location location)
     {
@@ -144,6 +195,9 @@ public final class ClientGameEventController implements IClientGameEventListener
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.client.events.IClientGameEventListener#onPlayerRemoveSuggestion(domain.Player)
+     */
     @Override
     public void onPlayerRemoveSuggestion(final Player player)
     {
@@ -153,6 +207,9 @@ public final class ClientGameEventController implements IClientGameEventListener
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.client.events.IClientGameEventListener#onGameTurnEnd(int, domain.MapSlot, domain.Location)
+     */
     @Override
     public void onGameTurnEnd(int turn, final MapSlot slot, final Location location)
     {
@@ -162,6 +219,9 @@ public final class ClientGameEventController implements IClientGameEventListener
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.client.events.IClientGameEventListener#onTeamHit(int, int, int)
+     */
     @Override
     public void onTeamHit(final int team, final int health, final int maximumHealth)
     {
