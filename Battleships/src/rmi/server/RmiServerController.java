@@ -15,6 +15,10 @@ import rmi.RmiServer;
 import rmi.client.IClientController;
 import domain.Player;
 
+/**
+ * an abstract implementation of a java rmi battleships server
+ * @author rverbist
+ */
 public abstract class RmiServerController implements IServerController, Closeable
 {
     protected final RmiServer<IServerController> _server;
@@ -31,28 +35,29 @@ public abstract class RmiServerController implements IServerController, Closeabl
 
         logger.log(Level.INFO, String.format("Server created on %s", _server.getHost()));
     }
-
-    @Override
-    public void close() throws IOException
-    {
-        _server.close();
-    }
     
+    /**
+     * gets the client interface associated with the given player
+     * @param player the player to get the client interface for
+     * @return
+     */
     protected final IClientController getClient(final Player player)
     {
         return _clients.get(player).getInterface();
     }
     
+    /**
+     * gets the server interface
+     * @return the server interface
+     */
     protected final IServerController getServer() 
     {
         return _server.getInterface();
     }
-    
-    protected final Logger getLogger()
-    {
-        return Logger.getLogger(RmiServerController.class.getName());
-    }
 
+    /* (non-Javadoc)
+     * @see rmi.server.IServerController#connect(java.lang.String, int, java.lang.String, java.lang.String)
+     */
     @Override
     public void connect(final String host, final int port, final String resource, final String name)
     {
@@ -77,6 +82,9 @@ public abstract class RmiServerController implements IServerController, Closeabl
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.server.IServerController#disconnect(domain.Player)
+     */
     @Override
     public void disconnect(final Player player)
     {
@@ -87,7 +95,6 @@ public abstract class RmiServerController implements IServerController, Closeabl
             {
                 removePlayer(player);
                 client.getInterface().onDisconnected(player);
-                client.unbind();
                 
                 getLogger().log(Level.INFO, String.format("%s disconnected.", client));
             }
@@ -98,6 +105,29 @@ public abstract class RmiServerController implements IServerController, Closeabl
         }
     }
     
+    /**
+     * creates a player with the given name
+     * template method
+     * @param name the name of the player
+     * @return the player object
+     */
     protected abstract Player createPlayer(final String name);
+    
+    /**
+     * removes a player
+     * template method
+     * @param player the player to remove
+     */
     protected abstract void removePlayer(final Player player);
+    
+    protected final Logger getLogger()
+    {
+        return Logger.getLogger(RmiServerController.class.getName());
+    }
+
+    @Override
+    public void close() throws IOException
+    {
+        _server.close();
+    }
 }

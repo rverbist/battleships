@@ -12,9 +12,9 @@ import java.util.Set;
 @SuppressWarnings("serial")
 public final class PlacedShip implements Serializable
 {
-    public final Ship _ship;
-    public final Set<Location> _layout;
-    public final Set<Location> _health;
+    private final Ship _ship;
+    private final Set<Location> _layout;
+    private final Set<Location> _health;
 
     /**
      * creates a new representation of a ship that has been assigned a location on a board
@@ -93,6 +93,9 @@ public final class PlacedShip implements Serializable
         return _health.remove(location);
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
     @Override
     public int hashCode()
     {
@@ -102,6 +105,9 @@ public final class PlacedShip implements Serializable
         return result;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(Object obj)
     {
@@ -117,6 +123,9 @@ public final class PlacedShip implements Serializable
         return true;
     }
     
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString()
     {

@@ -17,6 +17,10 @@ import domain.MapSlot;
 import domain.Player;
 import domain.Team;
 
+/**
+ * a concrete implementation of a battleships server
+ * @author rverbist
+ */
 public final class ServerGameController extends RmiServerController
 {
     private Game _game;
@@ -27,16 +31,29 @@ public final class ServerGameController extends RmiServerController
         newGame();
     }
 
+    /**
+     * starts a new game
+     */
     private void newGame()
     {
         _game = new Game();
     }
 
+    /**
+     * gets a multicast interface for all connected clients
+     * @return a client interface whose methods delegate to all connected clients
+     * @see {@link ClientControllerMultiCast}
+     */
     protected final IClientController getClients()
     {
         return new ClientControllerMultiCast(_clients.values());
     }
 
+    /**
+     * gets a multicast interface for all clients that are in a team
+     * @return a client interface whose methods delegate to all clients that are in a team
+     * @see {@link ClientControllerMultiCast}
+     */
     protected final IClientController getClientsInTeam()
     {
         final List<RmiClient<IClientController>> players = new ArrayList<RmiClient<IClientController>>();
@@ -50,6 +67,12 @@ public final class ServerGameController extends RmiServerController
         return new ClientControllerMultiCast(players);
     }
 
+    /**
+     * gets a multicast interface for all clients in the given team
+     * @param team the team to include in the multicast
+     * @return a client interface whose methods delegate to all clients in the given team
+     * @see {@link ClientControllerMultiCast}
+     */
     protected final IClientController getClientsInTeam(final Team team)
     {
         final List<RmiClient<IClientController>> players = new ArrayList<RmiClient<IClientController>>();
@@ -60,6 +83,9 @@ public final class ServerGameController extends RmiServerController
         return new ClientControllerMultiCast(players);
     }
 
+    /* (non-Javadoc)
+     * @see rmi.server.RmiServerController#createPlayer(java.lang.String)
+     */
     @Override
     protected Player createPlayer(final String name)
     {
@@ -75,6 +101,9 @@ public final class ServerGameController extends RmiServerController
         return player;
     }
 
+    /* (non-Javadoc)
+     * @see rmi.server.RmiServerController#removePlayer(domain.Player)
+     */
     @Override
     protected void removePlayer(Player player)
     {
@@ -97,24 +126,36 @@ public final class ServerGameController extends RmiServerController
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.server.IServerController#getTeamName(int)
+     */
     @Override
     public String getTeamName(final int team) throws RemoteException
     {
         return _game.getTeam(team).getName();
     }
 
+    /* (non-Javadoc)
+     * @see rmi.server.IServerController#getTeamPlayers(int)
+     */
     @Override
     public Set<Player> getTeamPlayers(final int team) throws RemoteException
     {
         return _game.getTeam(team).getPlayers();
     }
 
+    /* (non-Javadoc)
+     * @see rmi.server.IServerController#getUnassignedPlayers()
+     */
     @Override
     public Set<Player> getUnassignedPlayers() throws RemoteException
     {
         return _game.getUnassignedPlayers();
     }
 
+    /* (non-Javadoc)
+     * @see rmi.server.IServerController#sendGlobalChatMessage(domain.Player, java.lang.String)
+     */
     @Override
     public void sendGlobalChatMessage(final Player player, final String message) throws RemoteException
     {
@@ -122,6 +163,9 @@ public final class ServerGameController extends RmiServerController
         getClients().onGlobalChatMessage(msg);
     }
 
+    /* (non-Javadoc)
+     * @see rmi.server.IServerController#joinTeam(domain.Player, int)
+     */
     @Override
     public void joinTeam(Player player, final int team) throws RemoteException
     {
@@ -137,6 +181,9 @@ public final class ServerGameController extends RmiServerController
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.server.IServerController#leaveTeam(domain.Player)
+     */
     @Override
     public void leaveTeam(Player player) throws RemoteException
     {
@@ -152,6 +199,9 @@ public final class ServerGameController extends RmiServerController
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.server.IServerController#sendTeamChatMessage(domain.Player, java.lang.String)
+     */
     @Override
     public void sendTeamChatMessage(final Player player, final String message) throws RemoteException
     {
@@ -163,6 +213,9 @@ public final class ServerGameController extends RmiServerController
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.server.IServerController#setReady(domain.Player, boolean)
+     */
     @Override
     public void setReady(Player player, final boolean isReady) throws RemoteException
     {
@@ -181,6 +234,9 @@ public final class ServerGameController extends RmiServerController
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.server.IServerController#addSuggestion(domain.Player, domain.Location)
+     */
     @Override
     public void addSuggestion(Player player, final Location suggestion) throws RemoteException
     {
@@ -206,6 +262,9 @@ public final class ServerGameController extends RmiServerController
         }
     }
 
+    /* (non-Javadoc)
+     * @see rmi.server.IServerController#removeSuggestion(domain.Player)
+     */
     @Override
     public void removeSuggestion(Player player) throws RemoteException
     {

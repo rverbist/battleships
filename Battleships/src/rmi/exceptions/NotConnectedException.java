@@ -1,5 +1,8 @@
 package rmi.exceptions;
 
+/**
+ * @author rverbist
+ */
 @SuppressWarnings("serial")
 public class NotConnectedException extends RuntimeException
 {

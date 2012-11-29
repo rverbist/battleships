@@ -86,6 +86,9 @@ public final class Ship implements Comparable<Ship>, Serializable
         return locations;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
     @Override
     public int hashCode()
     {
@@ -95,6 +98,9 @@ public final class Ship implements Comparable<Ship>, Serializable
         return result;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(Object obj)
     {
@@ -110,12 +116,18 @@ public final class Ship implements Comparable<Ship>, Serializable
         return true;
     }
     
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString()
     {
         return getType().toString();
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
     @Override
     public int compareTo(Ship o)
     {

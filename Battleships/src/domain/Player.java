@@ -74,6 +74,9 @@ public final class Player implements Comparable<Player>, Serializable
         _isReady = isReady;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
     @Override
     public int compareTo(Player other)
     {
@@ -89,6 +92,9 @@ public final class Player implements Comparable<Player>, Serializable
         return _id - other._id;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
     @Override
     public int hashCode()
     {
@@ -98,6 +104,9 @@ public final class Player implements Comparable<Player>, Serializable
         return result;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(Object obj)
     {
