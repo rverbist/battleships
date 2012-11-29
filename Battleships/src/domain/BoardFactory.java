@@ -5,6 +5,10 @@ import java.util.Random;
 import exceptions.LocationAlreadyTaken;
 import exceptions.LocationOutOfBounds;
 
+/**
+ * a factory to create Board objects that are already populated with ships
+ * @author rverbist
+ */
 public final class BoardFactory
 {
     private static final BoardFactory _instance = new BoardFactory();
@@ -21,6 +25,12 @@ public final class BoardFactory
     {
     }
     
+    /**
+     * creates a new {@link Board} of the given dimension with the standard amount of ships
+     * randomly placed on the {@link Board}.
+     * @param dimension the dimension of the {@link Board}
+     * @return a {@link Board} of the given dimension
+     */
     public synchronized Board create(int dimension)
     {
         final Board board = new Board(dimension);

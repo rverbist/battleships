@@ -2,6 +2,10 @@ package exceptions;
 
 import domain.Location;
 
+/**
+ * represents an error where a location is outside of bounds
+ * @author rverbist
+ */
 @SuppressWarnings("serial")
 public final class LocationOutOfBounds extends LocationException
 {

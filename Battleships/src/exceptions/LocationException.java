@@ -2,6 +2,10 @@ package exceptions;
 
 import domain.Location;
 
+/**
+ * represents a location related error
+ * @author rverbist
+ */
 @SuppressWarnings("serial")
 public abstract class LocationException extends RuntimeException
 {

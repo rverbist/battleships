@@ -3,6 +3,10 @@ package domain;
 import java.awt.Color;
 import java.io.Serializable;
 
+/**
+ * represents a player of the battleships game
+ * @author rverbist
+ */
 @SuppressWarnings("serial")
 public final class Player implements Comparable<Player>, Serializable
 {
@@ -11,6 +15,12 @@ public final class Player implements Comparable<Player>, Serializable
     private final Color _color;
     private boolean _isReady;
 
+    /**
+     * creates a new player with the given id, name and color
+     * @param id the unique identifier of the player
+     * @param name the name of the player
+     * @param color the color of the player
+     */
     public Player(final int id, final String name, final Color color)
     {
         _id = id;
@@ -19,26 +29,46 @@ public final class Player implements Comparable<Player>, Serializable
         _isReady = false;
     }
 
+    /**
+     * gets the id
+     * @return the unique identifier of this player
+     */
     public int getId()
     {
         return _id;
     }
 
+    /**
+     * gets the name
+     * @return the name of the player
+     */
     public String getName()
     {
         return _name;
     }
 
+    /**
+     * gets the color
+     * @return the color of the player
+     */
     public Color getColor()
     {
         return _color;
     }
 
+    /**
+     * gets the ready status
+     * @return if this player is ready to start a game
+     */
     public boolean isReady()
     {
         return _isReady;
     }
 
+    /**
+     * sets the ready status
+     * @param isReady the status
+     */
     public void setReady(final boolean isReady)
     {
         _isReady = isReady;

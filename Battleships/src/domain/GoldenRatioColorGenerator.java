@@ -3,6 +3,11 @@ package domain;
 import java.awt.Color;
 import java.util.Random;
 
+/**
+ * a helper class to generate some neat color schemes, adapted from
+ * http://devmag.org.za/2012/07/29/how-to-choose-colours-procedurally-algorithms/
+ * @author rverbist
+ */
 public final class GoldenRatioColorGenerator
 {
     private static Random _rng = new Random();
@@ -12,6 +17,11 @@ public final class GoldenRatioColorGenerator
     private final float _saturation;
     private final float _brightness;
     
+    /**
+     * creates a new {@link GoldenRatioColorGenerator} instance with the given saturation and brightness
+     * @param saturation saturation level
+     * @param brightness brightness level
+     */
     public GoldenRatioColorGenerator(final float saturation, final float brightness)
     {
         _hue = _rng.nextFloat();
@@ -19,6 +29,10 @@ public final class GoldenRatioColorGenerator
         _brightness = brightness;
     }
     
+    /**
+     * generate the next {@link Color} in the sequence
+     * @return a {@link Color} object
+     */
     public Color next()
     {
         _hue += _ratio;

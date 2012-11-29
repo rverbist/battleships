@@ -2,39 +2,68 @@ package domain;
 
 import java.io.Serializable;
 
+/**
+ * an immutable location structure
+ * @author rverbist
+ */
 @SuppressWarnings("serial")
 public final class Location implements Comparable<Location>, Serializable
 {
     private final int _row;
     private final int _column;
 
+    /**
+     * copy constructor
+     */
     public Location(final Location other)
     {
         _row = other.getRow();
         _column = other.getColumn();
     }
 
+    
+    /**
+     * creates a new {@link Location} with the given row and column
+     * @param row row value
+     * @param column column value
+     */
     public Location(final int row, final int column)
     {
         _row = row;
         _column = column;
     }
 
+    /**
+     * @return the row value of this instance
+     */
     public int getRow()
     {
         return _row;
     }
 
+    /**
+     * @return the column value of this instance
+     */
     public int getColumn()
     {
         return _column;
     }
 
+    /**
+     * generates the battleships row value of this location by calculating the 1-based index
+     * and converting the number to its string equivalent (1, 2, 3...)
+     * @return the row value as text
+     */
     public String getRowText()
     {
         return String.format("%2d", rebase(_row));
     }
 
+    /**
+     * generates the battleships column value of this location by calculating the 1-based index
+     * and converting the number to its string equivalent (A, B, C,...)
+     * @return
+     */
     public String getColumnText()
     {
         return String.valueOf((char) ('A' + (rebase(_column) - 1)));
