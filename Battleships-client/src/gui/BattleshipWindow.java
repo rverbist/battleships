@@ -21,6 +21,7 @@ public class BattleshipWindow extends JFrame
         this.setVisible(true);
         this.pack();
 
+        // center the window center screen
         final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation((dim.width - getSize().width) / 2, (dim.height - getSize().height) / 2);
     }

@@ -9,6 +9,9 @@ import domain.Player;
 import domain.Location;
 import domain.PlacedShip;
 
+/**
+ * @author rverbist
+ */
 public final class BattleShipGridModel extends domain.util.Model
 {
     public BattleShipGridModel()

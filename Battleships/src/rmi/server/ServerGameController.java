@@ -160,6 +160,7 @@ public final class ServerGameController extends RmiServerController
     public void sendGlobalChatMessage(final Player player, final String message) throws RemoteException
     {
         final String msg = String.format("%s says: %s", player.getName(), message);
+        // fire the onGlobalChatMessage event for all players
         getClients().onGlobalChatMessage(msg);
     }
 
@@ -169,14 +170,21 @@ public final class ServerGameController extends RmiServerController
     @Override
     public void joinTeam(Player player, final int team) throws RemoteException
     {
+        // capture a reference the the server local instance of the player
         player = _game.getLocalPlayer(player);
+        // join the team
         if (player != null && _game.joinTeam(player, team))
         {
+            // set the ready status of the player to false
             if (_game.setReady(player, false))
             {
+                // set the ready status of the player to false so that the player
+                // can't accidently start a game by changing teams
                 getClients().onPlayerIsReadyChanged(player);
             }
+            // fire the onPlayerAssigned event for all players
             getClients().onPlayerAssigned(player);
+            // fire the onPlayerJoinedTeam event for all players
             getClients().onPlayerJoinedTeam(player, team);
         }
     }
@@ -187,14 +195,21 @@ public final class ServerGameController extends RmiServerController
     @Override
     public void leaveTeam(Player player) throws RemoteException
     {
+        // capture a reference the the server local instance of the player
         player = _game.getLocalPlayer(player);
+        // leave the team
         if (player != null && _game.leaveTeam(player))
         {
+            // set the ready status of the player to false so that the player
+            // can't accidently start a game by changing teams
             if (_game.setReady(player, false))
             {
+                // fire the onPlayerIsReadyChanged for all players
                 getClients().onPlayerIsReadyChanged(player);
             }
+            // fire the onPlayerUnassigned event for all players
             getClients().onPlayerUnassigned(player);
+            // fire the onPlayerLeftTeam event for all players
             getClients().onPlayerLeftTeam(player);
         }
     }
@@ -209,6 +224,7 @@ public final class ServerGameController extends RmiServerController
         if (team != null)
         {
             final String msg = String.format("%s says: %s", player.getName(), message);
+            // fire the onPlayerLeftTeam event for the entire team
             getClientsInTeam(team).onTeamChatMessage(msg);
         }
     }
@@ -219,16 +235,23 @@ public final class ServerGameController extends RmiServerController
     @Override
     public void setReady(Player player, final boolean isReady) throws RemoteException
     {
+        // capture a reference the the server local instance of the player
         player = _game.getLocalPlayer(player);
+        // change the ready status of the player
         if (player != null && _game.setReady(player, isReady))
         {
+            // fire the onPlayerLeftTeam event for all players
             getClients().onPlayerIsReadyChanged(player);
+            // if every player has changed their status to ready, the game can start
             if (_game.isReady())
             {
+                // notify each team that the game has started
                 for (final Team team : _game.getTeams())
                 {
+                    // fire the getClientsInTeam event for all players in this team
                     getClientsInTeam(team).onGameStart(_game.getTeamIndex(team), team.getBoard());
                 }
+                // fire the onGameTurnStart for all players in a team
                 getClientsInTeam().onGameTurnStart(_game.nextTurn());
             }
         }
@@ -240,23 +263,35 @@ public final class ServerGameController extends RmiServerController
     @Override
     public void addSuggestion(Player player, final Location suggestion) throws RemoteException
     {
+        // capture a reference the the server local instance of the player
         player = _game.getLocalPlayer(player);
+        // add the suggestion
         if (player != null && _game.addTeamSuggestion(player, suggestion))
         {
             final Team team = _game.getTeamForPlayer(player);
+            // fire the onPlayerAddSuggestion for all players in this team
             getClientsInTeam(team).onPlayerAddSuggestion(player, suggestion);
-
+            // if every team member has suggested a location, the game can fire
+            // a missile on the suggested location
             final Location target = team.getSuggestedLocation();
             if (target != null)
             {
-                team.clearSuggestions();
+                // get the opposing team
                 final Team opposition = _game.getOpposingTeamForPlayer(player);
+                // launch a missile at the proposed location
                 final MapSlot slot = opposition.fire(target);
                 if (slot == MapSlot.Hit)
                 {
+                    // fire the onTeamHit event for all players in a team
                     getClientsInTeam().onTeamHit(_game.getTeamIndex(opposition), opposition.getHealth(), opposition.getMaximumHealth());
                 }
+                // clear suggestions
+                team.clearSuggestions();
+                // end the current turn
+                // fire the onGameTurnEnd event for all players in a team
                 getClientsInTeam().onGameTurnEnd(_game.getTeamIndex(team), slot, target);
+                // start a new turn
+                // fire the onGameTurnStart event for all players in a team
                 getClientsInTeam().onGameTurnStart(_game.nextTurn());
             }
         }
@@ -268,10 +303,13 @@ public final class ServerGameController extends RmiServerController
     @Override
     public void removeSuggestion(Player player) throws RemoteException
     {
+        // capture a reference the the server local instance of the player
         player = _game.getLocalPlayer(player);
+        // remove the suggestion
         if (player != null && _game.removeTeamSuggestion(player))
         {
             final Team team = _game.getTeamForPlayer(player);
+            // fire the onPlayerRemoveSuggestion for all players in this team
             getClientsInTeam(team).onPlayerRemoveSuggestion(player);
         }
     }

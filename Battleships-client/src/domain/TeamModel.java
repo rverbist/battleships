@@ -10,6 +10,10 @@ import domain.util.Model;
 import rmi.client.ClientGameController;
 import rmi.client.events.ClientGameEventListenerAdapter;
 
+/**
+ * a model for a team
+ * @author rverbist
+ */
 public final class TeamModel extends Model
 {
     private final ClientGameController _controller;
@@ -30,14 +34,10 @@ public final class TeamModel extends Model
             {
                 if (_team == team)
                 {
-                    // note
-                    // i'm well aware that doing this creates a new set, however
-                    // n will always be extremely small and this event will not
-                    // occur often enough to become a performance problem
-                    final Set<Player> players = new TreeSet<Player>(getPlayers());
+                    final Set<Player> players = getPlayers();
                     if (players.add(player))
                     {
-                        setPlayers(players);
+                        notifyPropertyChanged("players", players, players);
                     }
                 }
             }
@@ -45,73 +45,84 @@ public final class TeamModel extends Model
             @Override
             public void onPlayerLeftTeam(final Player player)
             {
-                // note
-                // i'm well aware that doing this creates a new set, however
-                // n will always be extremely small and this event will not
-                // occur often enough to become a performance problem
-                final Set<Player> players = new TreeSet<Player>(getPlayers());
+                final Set<Player> players = getPlayers();
                 if (players.remove(player))
                 {
-                    setPlayers(players);
+                    notifyPropertyChanged("players", players, players);
                 }
             }
 
             @Override
             public void onTeamChatMessage(final String message)
             {
-                // note
-                // this is very far from optimal performance and memory consumption
-                // might get way out of hand with huge chat buffers!
-                // TODO: use an immutable linked list
-                final List<String> messages = new LinkedList<String>(getMessages());
-                messages.add(message);
-                setMessages(messages);
+                final List<String> messages = getMessages();
+                if (messages.add(message))
+                {
+                    notifyPropertyChanged("messages", messages, messages);
+                }
             }
         });
     }
 
+    /**
+     * joins the team
+     */
     public void join()
     {
         _controller.joinTeam(_team);
     }
 
+    /**
+     * leaves the team
+     */
     public void leave()
     {
         _controller.leaveTeam();
     }
 
+    /**
+     * sends a formatted chat message to the team
+     * @param format the format string
+     * @param args the format arguments
+     */
     public void sendChatMessage(final String format, final String... args)
     {
         sendChatMessage(String.format(format, (Object[]) args));
     }
 
+    /**
+     * sends a chat message to the team
+     * @param message the message
+     */
     public void sendChatMessage(final String message)
     {
         _controller.sendTeamChatMessage(message);
     }
 
+    /**
+     * gets the name
+     * @return the name of the team
+     */
     public String getName()
     {
         return getProperty("name");
     }
 
+    /**
+     * gets the players
+     * @return a mutable set of the players in the team
+     */
     public Set<Player> getPlayers()
     {
         return getProperty("players");
     }
 
-    private void setPlayers(final Set<Player> players)
-    {
-        setProperty("players", players);
-    }
-
+    /**
+     * gets the messages
+     * @return a mutable list of the messages in the team
+     */
     public List<String> getMessages()
     {
         return getProperty("messages");
-    }
-
-    private void setMessages(final List<String> messages)
-    {
-        setProperty("messages", messages);
     }
 }

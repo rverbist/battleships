@@ -1,5 +1,9 @@
 package domain.util;
 
+/**
+ * an adapter for {@link INotifyPropertyChanged}
+ * @author rverbist
+ */
 public class NotifyPropertyChangedAdapter implements INotifyPropertyChanged
 {
     @Override

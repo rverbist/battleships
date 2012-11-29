@@ -19,6 +19,9 @@ import domain.Player;
 import domain.util.Model;
 import domain.util.NotifyPropertyChangedAdapter;
 
+/**
+ * @author rverbist
+ */
 @SuppressWarnings("serial")
 public class BattleShipGrid extends JComponent implements MouseListener, MouseMotionListener, BattleShipGridSelectionModel.Listener
 {

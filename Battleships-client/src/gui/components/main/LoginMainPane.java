@@ -17,6 +17,9 @@ import javax.swing.SwingConstants;
 
 import rmi.client.ClientGameController;
 
+/**
+ * @author rverbist
+ */
 @SuppressWarnings("serial")
 public class LoginMainPane extends JPanel
 {

@@ -11,6 +11,9 @@ import rmi.client.ClientGameController;
 import rmi.client.events.ClientGameEventListenerAdapter;
 import domain.Player;
 
+/**
+ * @author rverbist
+ */
 @SuppressWarnings("serial")
 public final class StatusPane extends JPanel
 {

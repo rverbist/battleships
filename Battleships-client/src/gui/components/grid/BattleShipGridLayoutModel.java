@@ -4,6 +4,9 @@ import java.awt.Color;
 
 import domain.util.Model;
 
+/**
+ * @author rverbist
+ */
 public class BattleShipGridLayoutModel extends Model
 {
     public BattleShipGridLayoutModel()

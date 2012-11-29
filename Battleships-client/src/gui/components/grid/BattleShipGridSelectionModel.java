@@ -7,6 +7,9 @@ import java.util.Set;
 
 import domain.util.Model;
 
+/**
+ * @author rverbist
+ */
 public final class BattleShipGridSelectionModel extends Model
 {
     public interface Listener

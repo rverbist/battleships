@@ -24,6 +24,9 @@ import domain.Player;
 import rmi.client.ClientGameController;
 import rmi.client.events.ClientGameEventListenerAdapter;
 
+/**
+ * @author rverbist
+ */
 @SuppressWarnings("serial")
 public final class GameMainPane extends JPanel implements BattleShipGridSelectionModel.Listener
 {

@@ -8,6 +8,10 @@ import domain.util.Model;
 import rmi.client.ClientGameController;
 import rmi.client.events.ClientGameEventListenerAdapter;
 
+/**
+ * a model for unassigned players
+ * @author rverbist
+ */
 public final class UnassignedModel extends Model
 {
     public UnassignedModel(final ClientGameController controller)
@@ -37,6 +41,10 @@ public final class UnassignedModel extends Model
         });
     }
 
+    /**
+     * gets the players
+     * @return a mutable set of the unassigned players
+     */
     public Set<Player> getPlayers()
     {
         return getProperty("players");

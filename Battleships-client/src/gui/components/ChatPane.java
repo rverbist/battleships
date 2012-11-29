@@ -26,6 +26,9 @@ import domain.TeamChatModel;
 import domain.util.Model;
 import domain.util.NotifyPropertyChangedAdapter;
 
+/**
+ * @author rverbist
+ */
 @SuppressWarnings("serial")
 public final class ChatPane extends JTabbedPane
 {
