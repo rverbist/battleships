@@ -42,7 +42,7 @@ public final class ServerGameController extends RmiServerController
     /**
      * gets a multicast interface for all connected clients
      * @return a client interface whose methods delegate to all connected clients
-     * @see {@link ClientControllerMultiCast}
+     * @see ClientControllerMultiCast
      */
     protected final IClientController getClients()
     {
@@ -52,7 +52,7 @@ public final class ServerGameController extends RmiServerController
     /**
      * gets a multicast interface for all clients that are in a team
      * @return a client interface whose methods delegate to all clients that are in a team
-     * @see {@link ClientControllerMultiCast}
+     * @see ClientControllerMultiCast
      */
     protected final IClientController getClientsInTeam()
     {
@@ -71,7 +71,7 @@ public final class ServerGameController extends RmiServerController
      * gets a multicast interface for all clients in the given team
      * @param team the team to include in the multicast
      * @return a client interface whose methods delegate to all clients in the given team
-     * @see {@link ClientControllerMultiCast}
+     * @see ClientControllerMultiCast
      */
     protected final IClientController getClientsInTeam(final Team team)
     {

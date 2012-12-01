@@ -19,10 +19,14 @@ public class StartUpServer
         catch (IOException e)
         {
             System.err.println("An error has occured while starting the server");
+            System.err.println(e.getMessage());
+            e.printStackTrace(System.err);
         }
         catch (AlreadyBoundException e)
         {
             System.err.println("Unable to start the server, another server is already running. Only one instance of this server may be active at any given time.");
+            System.err.println(e.getMessage());
+            e.printStackTrace(System.err);
         }
     }
 }

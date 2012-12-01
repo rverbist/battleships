@@ -69,9 +69,9 @@ public final class Ship implements Comparable<Ship>, Serializable
     }
     
     /**
-     * maps the layout of this ship relative to the given {@link location}
-     * @param location the {@link location} of the ship's head
-     * @return a set of {@link location} that represent the layout of this ship
+     * maps the layout of this ship relative to the given {@link Location}
+     * @param location the {@link Location} of the ship's head
+     * @return a set of {@link Location} that represent the layout of this ship
      */
     public Set<Location> map(final Location location) 
     {

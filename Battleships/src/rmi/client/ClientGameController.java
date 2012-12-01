@@ -194,7 +194,7 @@ public final class ClientGameController extends RmiClientController
      * gets the team name
      * @param team the index of the team
      * @return the name of the team at the given index
-     * @see {@link IServerController#getTeamName}
+     * @see IServerController#getTeamName
      */
     public String getTeamName(final int team)
     {
@@ -214,7 +214,7 @@ public final class ClientGameController extends RmiClientController
      * gets the team players
      * @param team the index of the team
      * @return the name of the team at the given index
-     * @see {@link IServerController#getTeamPlayers}
+     * @see IServerController#getTeamPlayers
      */
     public Set<Player> getTeamPlayers(final int team)
     {
@@ -233,7 +233,7 @@ public final class ClientGameController extends RmiClientController
     /**
      * gets the unassigned players
      * @return the unassigned players
-     * @see {@link IServerController#getUnassignedPlayers}
+     * @see IServerController#getUnassignedPlayers
      */
     public Set<Player> getUnassignedPlayers()
     {

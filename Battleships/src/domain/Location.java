@@ -62,7 +62,7 @@ public final class Location implements Comparable<Location>, Serializable
     /**
      * generates the battleships column value of this location by calculating the 1-based index
      * and converting the number to its string equivalent (A, B, C,...)
-     * @return
+     * @return the column value as text
      */
     public String getColumnText()
     {

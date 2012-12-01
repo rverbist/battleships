@@ -11,8 +11,8 @@ import exceptions.LocationOutOfBounds;
 /**
  * the {@link Board} class represents a single battleship game board. The board
  * keeps track of the condition of each slot as well as any placed ships
- * @see {@link MapSlot}
- * @see {@link PlacedShip}
+ * @see MapSlot
+ * @see PlacedShip
  * @author rverbist
  */
 @SuppressWarnings("serial")

@@ -39,7 +39,7 @@ public abstract class RmiServerController implements IServerController, Closeabl
     /**
      * gets the client interface associated with the given player
      * @param player the player to get the client interface for
-     * @return
+     * @return the client interface
      */
     protected final IClientController getClient(final Player player)
     {
