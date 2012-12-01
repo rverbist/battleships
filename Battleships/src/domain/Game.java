@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -304,5 +305,33 @@ public final class Game implements Serializable
         _currentTeamIndex += 1;
         _currentTeamIndex %= _teams.size();
         return _currentTeamIndex;
+    }
+    
+    /**
+     * gets the winning team
+     * @return the winning team, null if no such team exists
+     */
+    public Team getWinningTeam()
+    {
+        final ArrayList<Team> teams = new ArrayList<Team>(_teams);
+        final ListIterator<Team> iter = teams.listIterator();
+        while (iter.hasNext())
+        {
+            final Team team = iter.next();
+            if (team.getHealth() <= 0)
+            {
+                iter.remove();
+            }
+        }
+        return teams.size() == 1 ? teams.get(0) : null;
+    }
+
+    /**
+     * gets if the game is finished
+     * @return true if the game has been finished, false otherwise
+     */
+    public boolean isFinished()
+    {
+        return getWinningTeam() != null;
     }
 }

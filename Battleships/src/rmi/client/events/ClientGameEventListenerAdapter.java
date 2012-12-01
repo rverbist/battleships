@@ -130,4 +130,12 @@ public class ClientGameEventListenerAdapter implements IClientGameEventListener
     public void onTeamHit(final int team, final int health, final int maximumHealth)
     {
     }
+
+    /* (non-Javadoc)
+     * @see rmi.client.events.IClientGameEventListener#onGameEnd(int)
+     */
+    @Override
+    public void onGameEnd(int winner)
+    {
+    }
 }

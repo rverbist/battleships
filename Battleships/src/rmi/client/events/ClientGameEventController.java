@@ -230,4 +230,16 @@ public final class ClientGameEventController implements IClientGameEventListener
             listener.onTeamHit(team, health, maximumHealth);
         }
     }
+
+    /* (non-Javadoc)
+     * @see rmi.client.events.IClientGameEventListener#onGameEnd(int)
+     */
+    @Override
+    public void onGameEnd(int winner)
+    {
+        for(final IClientGameEventListener listener : _listeners)
+        {
+            listener.onGameEnd(winner);
+        }
+    }
 }

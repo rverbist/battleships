@@ -391,6 +391,15 @@ public final class ClientGameController extends RmiClientController
     {
         _events.onTeamHit(team, health, maximumHealth);
     }
+    
+    /* (non-Javadoc)
+     * @see rmi.client.IClientController#onGameEnd(int)
+     */
+    @Override
+    public void onGameEnd(final int winner)
+    {
+        _events.onGameEnd(winner);
+    }
 
     /* (non-Javadoc)
      * @see rmi.client.RmiClientController#close()

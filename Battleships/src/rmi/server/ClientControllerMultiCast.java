@@ -213,4 +213,16 @@ public final class ClientControllerMultiCast implements IClientController
             controller.onTeamHit(team, health, maximumHealth);
         }
     }
+
+    /* (non-Javadoc)
+     * @see rmi.client.IClientController#onGameEnd(int)
+     */
+    @Override
+    public void onGameEnd(final int winner) throws RemoteException
+    {
+        for (final IClientController controller : _controllers)
+        {
+            controller.onGameEnd(winner);
+        }
+    }
 }

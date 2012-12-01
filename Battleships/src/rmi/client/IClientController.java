@@ -125,4 +125,11 @@ public interface IClientController extends Remote
      * @throws RemoteException if an java rmi related exception occurs
      */
     void onGameTurnEnd(final int turn, final MapSlot slot, final Location location) throws RemoteException;
+    
+    /**
+     * occurs when the game has ended and a winner has been declared
+     * @param winner the index of the winning team
+     * @throws RemoteException if an java rmi related exception occurs
+     */
+    void onGameEnd(final int winner) throws RemoteException;
 }

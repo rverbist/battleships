@@ -287,12 +287,20 @@ public final class ServerGameController extends RmiServerController
                 }
                 // clear suggestions
                 team.clearSuggestions();
-                // end the current turn
-                // fire the onGameTurnEnd event for all players in a team
-                getClientsInTeam().onGameTurnEnd(_game.getTeamIndex(team), slot, target);
-                // start a new turn
-                // fire the onGameTurnStart event for all players in a team
-                getClientsInTeam().onGameTurnStart(_game.nextTurn());
+                if (_game.isFinished())
+                {
+                    final Team winner = _game.getWinningTeam();
+                    getClientsInTeam().onGameEnd(_game.getTeamIndex(winner));
+                }
+                else
+                {
+                    // end the current turn
+                    // fire the onGameTurnEnd event for all players in a team
+                    getClientsInTeam().onGameTurnEnd(_game.getTeamIndex(team), slot, target);
+                    // start a new turn
+                    // fire the onGameTurnStart event for all players in a team
+                    getClientsInTeam().onGameTurnStart(_game.nextTurn());
+                }
             }
         }
     }
