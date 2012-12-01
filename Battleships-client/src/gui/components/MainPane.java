@@ -101,6 +101,16 @@ public final class MainPane extends JPanel
                 try { _layout.replace(_lobbyPaneContainer, _gamePaneContainer); }
                 catch(IllegalArgumentException e) {}
             }
+            
+            @Override
+            public void onGameEnd(final int winner)
+            {
+                // just return to lobby
+                try { _layout.replace(_loginPaneContainer, _lobbyPaneContainer); }
+                catch(IllegalArgumentException e) {}
+                try { _layout.replace(_gamePaneContainer, _lobbyPaneContainer); }
+                catch(IllegalArgumentException e) {}
+            }
         });
     }
 }

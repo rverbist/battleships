@@ -111,6 +111,12 @@ public class StartUpClient
                 {
                     System.out.println("onTeamHit");
                 }
+
+                @Override
+                public void onGameEnd(int winner)
+                {
+                    System.out.println("onGameEnd");
+                }
             });
 
             final BattleshipWindow w = new BattleshipWindow(controller);
