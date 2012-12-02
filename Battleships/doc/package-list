@@ -1,7 +1,8 @@
+
 domain
-exceptions
-rmi
-rmi.client
-rmi.client.events
-rmi.exceptions
-rmi.server
+domain.util
+gui
+gui.components
+gui.components.grid
+gui.components.main
+gui.layout

@@ -5,13 +5,7 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.rmi.AlreadyBoundException;
 
-import domain.Board;
-import domain.Location;
-import domain.MapSlot;
-import domain.Player;
-
 import rmi.client.ClientGameController;
-import rmi.client.events.IClientGameEventListener;
 
 public class StartUpClient
 {
@@ -20,6 +14,7 @@ public class StartUpClient
         try
         {
             final ClientGameController controller = new ClientGameController("localhost", 1099);
+            /*
             controller.getEventController().addListener(new IClientGameEventListener()
             {
                 @Override
@@ -118,6 +113,7 @@ public class StartUpClient
                     System.out.println("onGameEnd");
                 }
             });
+            */
 
             final BattleshipWindow w = new BattleshipWindow(controller);
             w.addWindowListener(new WindowAdapter()
